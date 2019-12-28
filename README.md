@@ -23,6 +23,7 @@ Later, I will make the list more accessible by categorizing the aliases, giving 
 	add-unmerged = "!git add `git list-unmerged`"
 	reset-unmerged = "!uf=`git list-unmerged`; git reset HEAD $uf; git checkout -- $uf"
 	lg = log --graph --pretty='format:%C(auto)%h%d %s %C(blue)%an %C(green)%cr'
+	timelog = log --date-order --pretty='format:%C(auto)%h %C(green)%cI %C(blue)%an %C(auto)%s%C(auto)%d'
 	get-tree-from = read-tree --reset -u
 	k = !gitk
 	log3 = log HEAD~3..HEAD
