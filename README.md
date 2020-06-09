@@ -28,6 +28,7 @@ Later, I will make the list more accessible by categorizing the aliases, giving 
 	k = !gitk
 	log3 = log HEAD~3..HEAD
 	logv = log --decorate --graph --stat
+	find = "!f() { git ls-files '**'$1'**'; }; f"
 	ls-ignored = ls-files -i --exclude-standard
 	svn-commit = "!git svn-up && git svn dcommit"
 	svn-stash-commit = "!git stash && git svn-commit && git stash pop"
