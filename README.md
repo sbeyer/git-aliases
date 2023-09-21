@@ -76,7 +76,7 @@ Later, I will make the list more accessible by categorizing the aliases, giving 
 	diw = di --color-words
 
 	# switch branches using fzf
-	sb = "!f() { branch=$(git branch -vva | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; if [ -n \"$branch\" ] ; then if [[ \"$branch\" =~ ^remotes/ ]] ; then git switch -t \"$branch\" ; else git switch \"$branch\" ; fi ; fi ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
+	sb = "!f() { branch=$(git branch -vva | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; case \"$branch\" in remotes/*) git switch -t \"$branch\" ;; \"\") echo Branch not changed. ;; *) git switch \"$branch\" ;; esac ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
 
 	# detach HEAD (yea, I sometimes want that)
 	detach = switch --detach
