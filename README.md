@@ -9,17 +9,19 @@ You have them in your Git configuration (e.g., `~/.gitconfig`), looking like thi
 	some-alias-name = "what-it-does"
 ```
 
-You are encouraged to share your aliases as an issue (preferred), pull request, or via [Twitter](http://twitter.com/_sbeyer_).
-
-For now I only list my used aliases.
-Later, I will make the list more accessible by categorizing the aliases, giving descriptions, use-cases, and examples.
+Here's a list of what I use:
 
 ```gitconfig
 [alias]
 	get-tree-from = read-tree --reset -u
-	s = status -uno
 	who = shortlog -s --
+
+	# git k for consistency
 	k = !gitk
+
+	# git status shortcuts
+	s = status -s
+	st = s -uno
 
 	# find files using git
 	find = "!f() { git ls-files '**'$1'**'; }; f"
@@ -34,7 +36,7 @@ Later, I will make the list more accessible by categorizing the aliases, giving 
 	edit = "!`git config core.editor`"
 
 	# handling git conflicts
-	list-unmerged = "list-changed --diff-filter=U"
+	ls-unmerged = "list-changed --diff-filter=U"
 	edit-unmerged = "!git edit `git list-unmerged`"
 	add-unmerged = "!git add `git list-unmerged`"
 	reset-unmerged = "!uf=`git list-unmerged`; git reset HEAD $uf; git checkout -- $uf"
@@ -63,7 +65,7 @@ Later, I will make the list more accessible by categorizing the aliases, giving 
 	# git git git git --help
 	git = !git
 
-	# a shortcut for the most used submodule command
+	# shortcut for the most used submodule command
 	sup = submodule update --recursive --init
 
 	# cd `git root`
@@ -74,6 +76,33 @@ Later, I will make the list more accessible by categorizing the aliases, giving 
 	dw = d --color-words
 	di = diff --cached
 	diw = di --color-words
+
+	# stash shortcuts
+	sl = stash list --pretty='format:%C(yellow)%gD %C(green)%cI %C(cyan)%s'
+	slp = sl -p
+	sls = sl --stat
+	srm = stash drop
+	sc = stash --keep-index
+	scc = stash
+	sccc = stash --include-untracked
+	sg = stash pop
+	sgg = stash pop --index
+
+	# shortcut to review changes into index
+	a = add -p
+
+	# shortcut for cherry-pick
+	cp = cherry-pick
+
+	# shortcut for fetch/pull
+	f = fetch -p
+	p = pull -p
+	pm = p --no-ff
+	pr = p --rebase
+
+	# shortcut for commit with message
+	cm = commit -m
+	ca = commit --amend
 
 	# switch branches using fzf
 	sb = "!f() { branch=$(git branch -vva | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; case \"$branch\" in remotes/*) git switch -t \"$branch\" ;; \"\") echo Branch not changed. ;; *) git switch \"$branch\" ;; esac ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
