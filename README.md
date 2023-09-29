@@ -82,11 +82,11 @@ Here's a list of what I use:
 	slp = sl -p
 	sls = sl --stat
 	srm = stash drop
-	sc = stash --keep-index
-	scc = stash
-	sccc = stash --include-untracked
+	sc = stash push --keep-index
+	scc = stash push
+	sccc = stash push --include-untracked
 	sg = stash pop
-	sgg = stash pop --index
+	sgg = sg --index
 
 	# shortcut to review changes into index
 	a = add -p
@@ -100,12 +100,29 @@ Here's a list of what I use:
 	pm = p --no-ff
 	pr = p --rebase
 
+	# shortcuts for merge
+	m = merge
+	mc = m --continue
+	ma = m --abort
+
+	# shortcuts for rebase
+	r = rebase -i
+	ri = r
+	rc = r --continue
+	rs = r --skip
+	ra = r --abort
+
 	# shortcut for commit with message
 	cm = commit -m
 	ca = commit --amend
 
+	# shortcut for branch stuff
+	bd = branch -d
+
 	# switch branches using fzf
-	sb = "!f() { branch=$(git branch -vva | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; case \"$branch\" in remotes/*) git switch -t \"$branch\" ;; \"\") echo Branch not changed. ;; *) git switch \"$branch\" ;; esac ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
+	sb = "!f() { branch=$(git branch -vvl | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; case \"$branch\" in \"\") echo Branch not changed. ;; *) git switch \"$branch\" ;; esac ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
+	sbr = "!f() { branch=$(git branch -vvr | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; case \"$branch\" in \"\") echo Branch not changed. ;; *) git switch -t \"$branch\" ;; esac ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
+	sba = "!f() { branch=$(git branch -vva | fzf -e | sed -ne 's/^..\\([^ ]*\\) .*$/\\1/p') ; case \"$branch\" in remotes/*) git switch -t \"$branch\" ;; \"\") echo Branch not changed. ;; *) git switch \"$branch\" ;; esac ; test \"$#\" -gt 0 && echo \"Ignored arguments: $@\" ; } ; f"
 
 	# detach HEAD (yea, I sometimes want that)
 	detach = switch --detach
